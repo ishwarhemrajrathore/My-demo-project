@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Agency and Web Design | Clear Digital</title>
+    <link rel="icon" href="https://www.cleardigital.com/favicon.ico" />
+    <style>
+      /* Background Video */
+      .bg-video {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      /* HEADER */
+      #header {
+        height: 80px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        padding: 0 5%;
+        transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+        background: transparent;
+      }
+
+      /* LOGO */
+      #logo h3 {
+        font-size: 40px;
+        color: white;
+        line-height: 1;
+        white-space: nowrap;
+        transition: color 0.4s ease;
+      }
+      #logo h3 span {
+        color: #d11a7b;
+        font-size: 22px;
+      }
+
+      /* navbar */
+      #nav ul {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+      #nav ul li a {
+        font-size: 20px;
+        text-decoration: none;
+        text-transform: capitalize;
+        color: white;
+        position: relative;
+        transition: color 0.4s ease;
+        padding-bottom: 5px;
+      }
+
+      /* Underline animation */
+      #nav ul li a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 3px;
+        background: #d11a7b;
+        transition: width 0.4s ease;
+        border-radius: 2px;
+      }
+      #nav ul li a:hover::after {
+        width: 100%;
+      }
+
+      /* Active link */
+      #nav ul li a.active {
+        color: #d11a7b;
+      }
+      #nav ul li a.active::after {
+        width: 100%;
+      }
+
+      /* Scroll effect */
+      #header.scrolled {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      #header.scrolled h3 {
+        color: black;
+      }
+      #header.scrolled ul li a {
+        color: black;
+      }
+      #header.scrolled ul li a.active {
+        color: #d11a7b;
+      }
+
+      /* Hover effect on header */
+      #header:hover {
+        background: white;
+      }
+      #header:hover h3 {
+        color: black;
+      }
+      #header:hover ul li a {
+        color: black;
+      }
+      #header:hover ul li a.active {
+        color: #d11a7b;
+      }
+
+      /* Menu button */
+      #menu-btn {
+        display: none;
+        font-size: 32px;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+        transition: color 0.4s ease;
+      }
+
+      /* Sections */
+      section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+      #work {
+        background: rgba(0, 0, 0, 0.3);
+      }
+      #services {
+        background: rgba(0, 100, 255, 0.3);
+      }
+      #insights {
+        background: rgba(0, 255, 100, 0.3);
+      }
+      #about {
+        background: rgba(200, 200, 0, 0.3);
+      }
+
+      /* Spacer for fixed header */
+      .spacer {
+        height: 80px;
+      }
+
+      /* Work Section */
+      #work {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 7%;
+        padding-right: 8%;
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        text-align: left;
+      }
+      .work-container {
+        max-width: 100%;
+        height: 400px;
+      }
+      .work-subtitle {
+        font-size: 28px;
+        margin-bottom: 15px;
+        font-weight: 400;
+      }
+      .work-title {
+        font-size: 120px;
+        font-weight: bold;
+        line-height: 1.2;
+        margin-bottom: 30px;
+      }
+      .work-title span {
+        text-decoration: underline;
+      }
+      .work-link {
+        display: inline-block;
+        font-size: 22px;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 2px solid #fff;
+        padding-bottom: 5px;
+        transition: all 0.3s ease;
+      }
+      .work-link:hover {
+        color: #ddd;
+        border-bottom-color: #ddd;
+      }
+
+      /* 📱 Mobile Responsive */
+      @media (max-width: 768px) {
+        #logo h3 {
+          font-size: 28px;
+        }
+        #nav ul {
+          position: absolute;
+          top: 80px;
+          right: 0;
+          flex-direction: column;
+          background: white;
+          width: 200px;
+          padding: 20px;
+          display: none;
+          z-index: 2000;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        #nav ul li {
+          margin-bottom: 15px;
+        }
+        #nav ul li a {
+          color: black;
+          font-size: 18px;
+        }
+        #nav ul.active {
+          display: flex;
+        }
+        #menu-btn {
+          display: block;
+          color: white;
+        }
+        #header.scrolled #menu-btn,
+        #header:hover #menu-btn {
+          color: black;
+        }
+        section {
+          font-size: 28px;
+        }
+        .work-title {
+          font-size: 40px;
+        }
+      }
+
+      /* Slider Section */
+      .slider-container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+      .slider {
+        display: flex;
+        width: 300%;
+        height: 100%;
+        transition: transform 1s ease-in-out;
+      }
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        flex-shrink: 0;
+      }
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      /* Buttons */
+      .prev,
+      .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 50%;
+        z-index: 10;
+      }
+      .prev {
+        left: 20px;
+      }
+      .next {
+        right: 20px;
+      }
+      .prev:hover,
+      .next:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+      /* Dots */
+      .dots {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+      .dot {
+        height: 12px;
+        width: 12px;
+        margin: 0 5px;
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .dot.active {
+        background: white;
+      }
+      #approach {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Video -->
+    <video autoplay muted loop class="bg-video">
+      <source src="bg-video.mp4" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Header -->
+    <div id="header">
+      <div id="logo">
+        <h3>Clear<span>o</span></h3>
+      </div>
+      <div id="menu-btn">☰</div>
+      <div id="nav">
+        <ul>
+          <li><a href="#work" class="active">Work</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="spacer"></div>
+
+    <!-- Sections -->
+    <section id="work">
+      <div class="work-container">
+        <p class="work-subtitle">Hello! We are Clear Digital</p>
+        <h1 class="work-title">Let's take you to what's <span>next.</span></h1>
+        <a href="#approach" class="work-link">See how we work →</a>
+      </div>
+    </section>
+
+    <!-- Slider Section -->
+    <section id="approach">
+      <div class="slider-container">
+        <div class="slider">
+          <div class="slide">
+            <img
+              src="./pexels-marta-klement-636760-1438081.jpg"
+              alt="Slide 1"
+            />
+          </div>
+          <div class="slide">
+            <img src="./pexels-pixabay-301920.jpg" alt="Slide 2" />
+          </div>
+          <div class="slide">
+            <img src="./pexels-tima-miroshnichenko-5427659.jpg" alt="Slide 3" />
+          </div>
+        </div>
+        <!-- Buttons -->
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
+        <!-- Dots -->
+        <div class="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">Services Section</section>
+    <section id="insights">Insights Section</section>
+    <section id="about">About Section</section>
+
+    <!-- Java Script -->
+    <script>
+      const header = document.getElementById("header");
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("#nav ul li a");
+      const menuBtn = document.getElementById("menu-btn");
+      const navList = document.querySelector("#nav ul");
+
+      // Scroll detection
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.clientHeight;
+          if (
+            window.scrollY >= sectionTop &&
+            window.scrollY < sectionTop + sectionHeight
+          ) {
+            current = section.getAttribute("id");
+          }
+        });
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Hamburger
+      menuBtn.addEventListener("click", () => {
+        navList.classList.toggle("active");
+        menuBtn.textContent = navList.classList.contains("active") ? "✖" : "☰";
+      });
+
+      //  Slider Logic
+      let index = 0;
+      const slides = document.querySelectorAll(".slide");
+      const slider = document.querySelector(".slider");
+      const dots = document.querySelectorAll(".dot");
+
+      function showSlide(i) {
+        if (i >= slides.length) index = 0;
+        if (i < 0) index = slides.length - 1;
+        slider.style.transform = `translateX(${-index * 100}vw)`;
+        dots.forEach((dot) => dot.classList.remove("active"));
+        dots[index].classList.add("active");
+      }
+
+      document.querySelector(".next").addEventListener("click", () => {
+        index++;
+        showSlide(index);
+      });
+      document.querySelector(".prev").addEventListener("click", () => {
+        index--;
+        showSlide(index);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+          index = i;
+          showSlide(index);
+        });
+      });
+
+      setInterval(() => {
+        index++;
+        showSlide(index);
+      }, 3000); // autoplay image after 4 sec
+    </script>
+  </body>
+</html>
